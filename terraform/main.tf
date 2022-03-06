@@ -12,7 +12,7 @@ locals {
     for Env in local.environments : [
           for App in local.app_types : {
             Env = Env
-                App = App
+            App = App
           }
         ]
   ]))
