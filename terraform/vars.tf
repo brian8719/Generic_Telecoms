@@ -15,7 +15,7 @@ variable "INSTANCE_NAME" {
   
   validation {
     condition     = length(var.INSTANCE_NAME) > 5
-    error-message = "Please enter a a valid INSTANCE_NAME in the format lnxstgdb101"
+    error_message = "Please enter a a valid INSTANCE_NAME in the format lnxstgdb101"
   }
 }
 
