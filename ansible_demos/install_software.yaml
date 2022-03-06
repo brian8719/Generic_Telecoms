@@ -1,0 +1,14 @@
+---
+- name: "Install list of software on all servers"
+  hosts: all_servers
+  remote_user: root
+
+  tasks:
+  - name: "install commonly required software"
+    yum:
+      state: latest
+      name:
+        - git
+        - telnet
+        - htop
+        - unzip
