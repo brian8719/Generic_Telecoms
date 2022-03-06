@@ -12,7 +12,11 @@ variable "AMI" {
 variable "INSTANCE_NAME" {
   description = "Value of the Name tag for the EC2 instance"
   type        = string
-  default     = "lnxenvxx000"
+  
+  validation {
+    condition     = length(var.INSTANCE_NAME) > 5
+    error-message = "Please enter a a valid INSTANCE_NAME in the format lnxstgdb101"
+  }
 }
 
 variable "ENV" {
