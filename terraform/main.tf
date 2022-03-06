@@ -29,5 +29,13 @@ resource "aws_instance" "test_demo" {
         Env = each.value.Env
         App = each.value.App
   }
+}
+  
+resource "aws_s3_bucket" "test_demo" {
+  bucket = "generic-telecoms-s3-bucket-12345"
+}
 
+resource "aws_s3_bucket_acl" "test_demo" {
+  bucket = "generic-telecoms-s3-bucket"
+  acl = "public-read"
 }
