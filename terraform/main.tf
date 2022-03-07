@@ -32,10 +32,10 @@ resource "aws_instance" "test_demo" {
 }
   
 resource "aws_s3_bucket" "test_demo" {
-  bucket = "generic-telecoms-s3-bucket-12345"
+  bucket = "generic-telecoms-s3-bucket-8719"
 }
 
 resource "aws_s3_bucket_acl" "test_demo" {
-  bucket = "generic-telecoms-s3-bucket"
+  bucket = "generic-telecoms-s3-bucket-8719"
   acl = "public-read"
 }
