@@ -39,3 +39,7 @@ resource "aws_s3_bucket_acl" "test_demo" {
   bucket = "generic-telecoms-s3-bucket-8719"
   acl = "public-read"
 }
+  
+resource "aws_s3_bucket" "test_demo" {
+  bucket = "generic-telecoms-s3-bucket-8719-private"
+}
