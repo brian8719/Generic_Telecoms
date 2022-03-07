@@ -1,0 +1,13 @@
+---
+- name: "Create DB Admin and copy file(s)"
+  hosts: db_servers
+  tasks:
+    - name: "Copy sample file to all Database servers"
+      copy: "src={{ file }} dest=/home/ec2-user"
+      
+    - name: "Create DB Admin"
+      user: "name=db_admin group=adm shell=/bin/bash,sudo generate_ssh_key=yes"
+
+  vars:
+    file: sample_apps/db/sample_db_file.txt
+

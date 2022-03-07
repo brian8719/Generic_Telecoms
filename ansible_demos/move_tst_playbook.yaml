@@ -1,0 +1,10 @@
+---
+-
+  hosts: tst_servers
+  tasks:
+    -
+      copy: "src={{ file }} dest=/home/ec2-user"
+      name: "Copy sample file to all test servers"
+  vars:
+    file: sample_env/tst/sample_tst_file.txt
+
