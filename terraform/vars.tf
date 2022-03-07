@@ -20,4 +20,3 @@ variable "INSTANCE_TYPE" {
 variable "KEY_NAME" {
   default = "Generic_Telecoms"
 }
-

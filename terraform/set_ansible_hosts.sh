@@ -1,3 +1,4 @@
+
 #!/bin/bash
 
 # get list of created servers from terraform
@@ -25,6 +26,7 @@ for vm in ${servers[@]}; do
 
   all_servers+=("${pub_ip} ansible_user=ec2-user ansible_python_interpreter=/usr/bin/python")
 
+
   if [[ "$name" == *"db"* ]] 
     then db_servers+=("${pub_ip} ansible_user=ec2-user ansible_python_interpreter=/usr/bin/python")
   fi
@@ -45,7 +47,7 @@ for vm in ${servers[@]}; do
   fi
 
 
-  if [[ "$name" == *"prd"* ]] 
+  if [[ "$name" == *"prd"* ]]
     then prd_servers+=("${pub_ip} ansible_user=ec2-user ansible_python_interpreter=/usr/bin/python")
   fi
 
@@ -57,5 +59,4 @@ printf "%s\n" "${web_app_servers[@]}" | sudo tee -a  /etc/ansible/hosts
 printf "%s\n" "${tst_servers[@]}" | sudo tee -a  /etc/ansible/hosts
 printf "%s\n" "${stg_servers[@]}" | sudo tee -a  /etc/ansible/hosts
 printf "%s\n" "${prd_servers[@]}" | sudo tee -a  /etc/ansible/hosts
-
 

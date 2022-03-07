@@ -25,12 +25,14 @@ resource "aws_instance" "test_demo" {
   instance_type = var.INSTANCE_TYPE
   key_name = var.KEY_NAME
   tags = {
+<<<<<<< HEAD
 	Name = "lnx${each.value.Env}${each.value.App}"
 	Env = each.value.Env
 	App = each.value.App
   }
   
 }
+ 
 
 resource "aws_s3_bucket" "test_demo" {
   bucket = "generic-telecoms-s3-bucket-8719"
@@ -39,4 +41,8 @@ resource "aws_s3_bucket" "test_demo" {
 resource "aws_s3_bucket_acl" "test_demo" {
   bucket = "generic-telecoms-s3-bucket-8719"
   acl = "public-read"
+}
+  
+resource "aws_s3_bucket" "test_demo" {
+  bucket = "generic-telecoms-s3-bucket-8719-private"
 }
