@@ -1,0 +1,60 @@
+---
+Parameters:
+  AvailabilityZone:
+    Type: String
+    Default: eu-west-1a
+    AllowedValues:
+      - eu-west-1a
+      - eu-west-2a
+  InstanceType:
+    Type: String
+    Default: t2.micro
+    AllowedValues:
+      - t1.micro
+      - t2.micro
+  KeyName:
+    Type: AWS::EC2::KeyPair::KeyName
+    Default: Generic_Telecoms
+  ImageId:
+    Type: String
+    Default: ami-0aef57767f5404a3c
+    AllowedValues:
+      - ami-0bb3fad3c0286ebd5 # Amazon Linux 2 AMI
+      - ami-0a669382ea0feb73a # Ubuntu 20.04.1 LTS (GNU/Linux 5.4.0-1029-aws x86_64)
+      - ami-08c78f444b967adf8 # Microsoft Windows Server 2019 Base
+      - ami-0aef57767f5404a3c
+
+Resources:
+  TUDublinEC2ManagementInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      AvailabilityZone: !Ref AvailabilityZone
+      InstanceType: !Ref InstanceType
+      KeyName: !Ref KeyName
+      ImageId: !Ref ImageId
+      SecurityGroups:
+        - !Ref ManagementSecurityGroup
+      UserData:
+        Fn::Base64: |
+           #!/bin/bash
+           sudo apt-get install software-properties-common -y
+           sudo apt-add-repository ppa:ansible/ansible -y
+           sudo apt-get update -y
+           sudo apt-get install ansible -y
+           sudo apt-get install awscli -y
+           wget https://releases.hashicorp.com/terraform/1.1.7/terraform_1.1.7_linux_386.zip
+           sudo apt-get install unzip -y
+           unzip terraform_1.1.7_linux_386.zip
+           sudo mv terraform /usr/local/bin/
+           sudo rm terraform_1.1.7_linux_386.zip
+           sudo apt install git-all -y
+           
+  ManagementSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "Allow SSH"
+      SecurityGroupIngress:
+      - CidrIp: 0.0.0.0/0
+        FromPort: '22'
+        IpProtocol: tcp
+        ToPort: '22'
